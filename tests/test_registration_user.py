@@ -1,6 +1,7 @@
 import pytest
 import allure
 from api_helper import user_registration, delete_user
+from data import DataMessages
 
 class TestUserRegistration:
 
@@ -30,7 +31,7 @@ class TestUserRegistration:
 
         assert response_double.status_code == 403
         assert response_double.json()['success'] == False
-        assert response_double.json()['message'] == 'User with such email already exists'
+        assert response_double.json()['message'] == DataMessages.NOT_UNIQUE_USER
 
     @allure.title('Пытаемся зарегистрировать пользователя с одним из пустых полей - негативна проверка')
     @pytest.mark.parametrize('empty_input', ['name', 'email', 'password'])
@@ -41,4 +42,4 @@ class TestUserRegistration:
 
         assert response.status_code == 403
         assert response.json()['success'] == False
-        assert response.json()['message'] == 'Email, password and name are required fields'
+        assert response.json()['message'] == DataMessages.CREATE_EMPTY_USER

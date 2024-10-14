@@ -2,6 +2,7 @@ import pytest
 import requests
 import allure
 import urls
+from data import DataMessages
 
 class TestLoginUser:
 
@@ -28,4 +29,4 @@ class TestLoginUser:
 
         assert response.status_code == 401
         assert response.json()['success'] == False
-        assert response.json()['message'] == "email or password are incorrect"
+        assert response.json()['message'] == DataMessages.INCORRECT_LOGIN_DATA

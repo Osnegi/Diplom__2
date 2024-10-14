@@ -2,6 +2,7 @@ import requests
 import allure
 import urls
 from api_helper import create_list_ingredients
+from data import DataMessages
 
 class TestCreateOrder:
 
@@ -37,7 +38,7 @@ class TestCreateOrder:
 
         assert response.status_code == 400
         assert response.json()['success'] == False
-        assert response.json()['message'] == 'Ingredient ids must be provided'
+        assert response.json()['message'] == DataMessages.CREATE_ORDER_EMPTY_INGREDIENTS
 
     @allure.title('Создаем заказ с неверным хешем ингредиентов - негативная проверка')
     def test_create_order_false_hash_ingredients_negative_check(self):

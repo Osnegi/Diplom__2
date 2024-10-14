@@ -1,6 +1,7 @@
 import requests
 import allure
 import urls
+from data import DataMessages
 
 class TestGetUserOrder:
 
@@ -25,4 +26,4 @@ class TestGetUserOrder:
 
         assert response.status_code == 401
         assert response.json()['success'] == False
-        assert response.json()['message'] == 'You should be authorised'
+        assert response.json()['message'] == DataMessages.UNAUTHORISED_USER
